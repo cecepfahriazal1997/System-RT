@@ -172,6 +172,24 @@
             </div>
         </div>
     </header>
+    <div class="topnav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+                <div class="collapse navbar-collapse" id="topnav-menu-content">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" :class="{'dropdown': item.child.length, 'active': item.child.length && item.active}" v-for="item in listMenu">
+                            <a class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}" href="#" @click="item.active = !item.active">
+                                <i class="me-2" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
+                            </a>
+                            <div class="dropdown-menu" :class="{'show': item.active}" aria-labelledby="topnav-apps" v-if="item.child.length">
+                                <a href="calendar.html" class="dropdown-item" v-for="child in item.child">{{child.title}}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
 </template>
 <script>
 import simplebar from 'simplebar-vue';
@@ -181,7 +199,38 @@ export default {
     name: 'NavBar',
     data() {
         return {
-
+            listMenu: [
+                {
+                    title: 'Dashboard',
+                    icon: 'mdi mdi-home-variant-outline',
+                    path: '#',
+                    active: true,
+                    child: []
+                },
+                {
+                    title: 'Data Warga',
+                    active: false,
+                    icon: 'mdi mdi-account-circle-outline',
+                    path: '#',
+                    child: []
+                },
+                {
+                    title: 'Keuangan',
+                    active: false,
+                    icon: 'mdi mdi-finance',
+                    path: '#',
+                    child: [
+                        {
+                            title: 'Transaksi Iuran',
+                            active: false
+                        },
+                        {
+                            title: 'Laporan Keuangan',
+                            active: false
+                        }
+                    ]
+                }
+            ]
         }
     },
     components: {
