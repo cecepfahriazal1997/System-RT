@@ -558,7 +558,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Notifications</h4>
 
-                                        <div class="pe-3" data-simplebar style="max-height: 287px;">
+                                        <simplebar class="pe-3" data-simplebar style="max-height: 287px;">
                                             <a href="#" class="text-body d-block">
                                                 <div class="d-flex py-3">
                                                     <div class="flex-shrink-0 me-3 align-self-center">
@@ -650,8 +650,7 @@
                                                     </div>
                                                 </div>
                                             </a>
-                        
-                                        </div>
+                                        </simplebar>
                                     </div>
                                     <!-- end card-body -->
                                 </div>
@@ -883,6 +882,9 @@
     </main>
 </template>
 <script>
+import simplebar from 'simplebar-vue';
+import 'simplebar-core/dist/simplebar.css';
+
 import { ApiCore } from '@/services/core';
 // import apiEnpoint from '@/services/api-endpoint';
 export default {
@@ -898,6 +900,9 @@ export default {
                 total: 0
             },
         }
+    },
+    components: {
+        simplebar,
     },
     mounted() {
         // this.fetchDataAnnouncement(this.pagination.page)

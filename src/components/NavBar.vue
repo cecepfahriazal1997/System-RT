@@ -4,23 +4,14 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box text-center">
-                    <!-- <a href="index.html" class="logo logo-dark">
+                    <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="https://themesdesign.in/upzet/layouts/assets/images/logo-sm.png" alt="logo-sm-dark" height="22">
+                            <img src="@/assets/images/logo/logo-square.svg" alt="logo-sm-dark" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="https://themesdesign.in/upzet/layouts/assets/images/logo-dark.png" alt="logo-dark" height="24">
+                            <img src="@/assets/images/logo/logo.svg" alt="logo-dark" height="50">
                         </span>
                     </a>
-
-                    <a href="index.html" class="logo logo-light">
-                        <span class="logo-sm">
-                            <img src="https://themesdesign.in/upzet/layouts/assets/images/logo-sm.png" alt="logo-sm-light" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="https://themesdesign.in/upzet/layouts/assets/images/logo-light.png" alt="logo-light" height="24">
-                        </span>
-                    </a> -->
                 </div>
 
                 <button type="button" class="btn btn-sm px-3 font-size-24 d-lg-none header-item" data-bs-toggle="collapse"
@@ -62,12 +53,6 @@
                     </div>
                 </div>
 
-                <div class="dropdown d-none d-lg-inline-block ms-1">
-                    <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
-                        <i class="ri-fullscreen-line"></i>
-                    </button>
-                </div>
-
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon waves-effect"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-simplebar style="max-height: 230px;">
+                        <simplebar data-simplebar style="max-height: 230px;">
                             <a href="" class="text-reset notification-item">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
@@ -152,7 +137,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </simplebar>
                         <div class="p-2 border-top">
                             <div class="d-grid">
                                 <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
@@ -184,24 +169,23 @@
                                 class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                     </div>
                 </div>
-
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                        <i class="mdi mdi-cog"></i>
-                    </button>
-                </div>
-
             </div>
         </div>
     </header>
 </template>
 <script>
+import simplebar from 'simplebar-vue';
+import 'simplebar-core/dist/simplebar.css';
+
 export default {
     name: 'NavBar',
     data() {
         return {
 
         }
+    },
+    components: {
+        simplebar,
     },
     methods: {
         async logout() {
