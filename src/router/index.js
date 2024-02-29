@@ -33,7 +33,7 @@ const routes = [
         }
     },
     {
-        path: '/signin/:role',
+        path: '/signin',
         name: 'signin',
         component: Signin,
         meta: {
@@ -71,19 +71,24 @@ router.beforeEach((to, from, next) => {
 
     if (isAllow) {
         if (localData && !authRequired) {
-            ApiCore.get(`${apiEnpoint.ACCOUNT}/info`, null, false)
-                    .then((response) => {
-                        if ('status' in response && !response.status) {
-                            localStorage.removeItem('token')
-                            next({name: 'home'})
-                        } else {
-                            stores.commit('setuser', response)
-                            next()
-                        }
-                    })
-                    .catch(() => {})
-        } else{
             next()
+            // ApiCore.get(`${apiEnpoint.ACCOUNT}/info`, null, false)
+            //         .then((response) => {
+            //             if ('status' in response && !response.status) {
+            //                 localStorage.removeItem('token')
+            //                 next({name: 'home'})
+            //             } else {
+            //                 stores.commit('setuser', response)
+            //                 next()
+            //             }
+            //         })
+            //         .catch(() => {})
+        } else {
+            if (to.path == '/') {
+                next({name: 'signin'})
+            } else {
+                next()
+            }
         }
     } else {
         next({name: 'notfound'})

@@ -6,7 +6,7 @@
                 <div class="navbar-brand-box text-center">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="@/assets/images/logo/logo-square.svg" alt="logo-sm-dark" height="22">
+                            <img src="@/assets/images/logo/logo.svg" alt="logo-sm-dark" height="22">
                         </span>
                         <span class="logo-lg">
                             <img src="@/assets/images/logo/logo.svg" alt="logo-dark" height="50">
@@ -20,39 +20,17 @@
                 </button>
 
                 <!-- App Search-->
-                <form class="app-search d-none d-lg-block">
-                    <div class="position-relative">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="ri-search-line"></span>
-                    </div>
-                </form>
-
+                <div class="d-flex align-items-center">
+                    <select class="form-select select-rounded-primary me-2">
+                        <option value="" v-for="item in [1,2,3,4,5,6,7,8,9]" class="bg-white text-dark">RW 0{{item}} &nbsp;</option>
+                    </select>
+                    <select class="form-select select-rounded-primary">
+                        <option value="" v-for="item in [1,2,3,4,5,6,7,8,9]" class="bg-white text-dark">RT 0{{item}} &nbsp;</option>
+                    </select>
+                </div>
             </div>
 
             <div class="d-flex">
-
-                <div class="dropdown d-inline-block d-lg-none ms-2">
-                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="ri-search-line"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                        aria-labelledby="page-header-search-dropdown">
-
-                        <form class="p-3">
-                            <div class="mb-3 m-0">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search ...">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit"><i
-                                                class="ri-search-line"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon waves-effect"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,53 +68,6 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <img src="https://themesdesign.in/upzet/layouts/assets/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="user-pic">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1">James Lemire</h6>
-                                        <div class="font-size-12 text-muted">
-                                            <p class="mb-1">It will seem like simplified English.</p>
-                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar-xs">
-                                            <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                <i class="ri-checkbox-circle-line"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1">Your item is shipped</h6>
-                                        <div class="font-size-12 text-muted">
-                                            <p class="mb-1">If several languages coalesce the grammar</p>
-                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="" class="text-reset notification-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <img src="https://themesdesign.in/upzet/layouts/assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs" alt="user-pic">
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1">Salena Layfield</h6>
-                                        <div class="font-size-12 text-muted">
-                                            <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
                         </simplebar>
                         <div class="p-2 border-top">
                             <div class="d-grid">
@@ -158,15 +89,10 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
-                        <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>
-                        <a class="dropdown-item" href="#"><i class="ri-wallet-2-line align-middle me-1"></i> My Wallet</a>
-                        <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end mt-1">11</span><i
-                                class="ri-settings-2-line align-middle me-1"></i> Settings</a>
-                        <a class="dropdown-item" href="#"><i class="ri-lock-unlock-line align-middle me-1"></i> Lock
-                            screen</a>
+                        <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profil</a>
+                        <a class="dropdown-item" href="#"><i class="ri-lock-line align-middle me-1"></i> Ubah Password</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#"><i
-                                class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                        <a class="dropdown-item text-danger" href="#" @click="logout()"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -177,12 +103,14 @@
             <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
                 <div class="collapse navbar-collapse" id="topnav-menu-content">
                     <ul class="navbar-nav">
-                        <li class="nav-item" :class="{'dropdown': item.child.length, 'active': item.child.length && item.active}" v-for="item in listMenu">
-                            <a class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}" href="#" @click="item.active = !item.active">
-                                <i class="me-2" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
-                            </a>
+                        <li class="nav-item" :class="{'dropdown': item.child.length}" v-for="item in listMenu">
+                            <router-link :to="item.url" class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}" @click="item.active = !item.active">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
+                                </div>
+                            </router-link>
                             <div class="dropdown-menu" :class="{'show': item.active}" aria-labelledby="topnav-apps" v-if="item.child.length">
-                                <a href="calendar.html" class="dropdown-item" v-for="child in item.child">{{child.title}}</a>
+                                <router-link :to="child.url" class="dropdown-item d-flex align-items-center justify-content-between" v-for="child in item.child">{{child.title}} <i class="mdi mdi-arrow-right" v-if="item.child.length"></i></router-link>
                             </div>
                         </li>
                     </ul>
@@ -202,34 +130,61 @@ export default {
             listMenu: [
                 {
                     title: 'Dashboard',
-                    icon: 'mdi mdi-home-variant-outline',
+                    icon: 'mdi mdi-view-dashboard-outline',
                     path: '#',
-                    active: true,
+                    url: '/',
                     child: []
                 },
                 {
-                    title: 'Data Warga',
-                    active: false,
-                    icon: 'mdi mdi-account-circle-outline',
+                    title: 'Data Master',
+                    icon: 'mdi mdi-database-outline',
                     path: '#',
-                    child: []
-                },
-                {
-                    title: 'Keuangan',
-                    active: false,
-                    icon: 'mdi mdi-finance',
-                    path: '#',
+                    url: '/master',
                     child: [
                         {
-                            title: 'Transaksi Iuran',
-                            active: false
+                            title: 'Pendidikan',
+                            url: '/education',
                         },
                         {
-                            title: 'Laporan Keuangan',
-                            active: false
+                            title: 'Pekerjaan',
+                            url: '/work',
+                        },
+                        {
+                            title: 'Organisasi',
+                            url: '/signin',
                         }
                     ]
-                }
+                },
+                {
+                    title: 'Data Penduduk',
+                    icon: 'mdi mdi-card-account-details-outline',
+                    path: '#',
+                    url: '/signin',
+                    child: []
+                },
+                {
+                    title: 'Jadwal',
+                    icon: 'mdi mdi-calendar-month-outline',
+                    path: '#',
+                    url: '/signin',
+                    child: []
+                },
+                // {
+                //     title: 'Keuangan',
+                //     icon: 'mdi mdi-clipboard-check-outline',
+                //     path: '#',
+                //     url: '/signin',
+                //     child: [
+                //         {
+                //             title: 'Transaksi Iuran',
+                //             url: '/signin',
+                //         },
+                //         {
+                //             title: 'Laporan Keuangan',
+                //             url: '/signin',
+                //         }
+                //     ]
+                // }
             ]
         }
     },
