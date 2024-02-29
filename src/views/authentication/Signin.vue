@@ -4,20 +4,18 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-4 col-lg-6 col-md-8">
-                    <div class="card">
+                    <div class="card custom-rounded">
                         <div class="card-body p-4">
                             <div class="">
-                                <div class="text-center">
+                                <div class="text-center mb-3">
                                     <a href="index.html" class="">
-                                        <!-- <img src="@assets/images/logo-dark.png" alt="" height="24" class="auth-logo logo-dark mx-auto">
-                                        <img src="@assets/images/logo-light.png" alt="" height="24" class="auth-logo logo-light mx-auto"> -->
+                                        <img src="@/assets/images/logo/logo.svg" alt="" height="60" class="auth-logo logo-dark mx-auto">
                                     </a>
                                 </div>
                                 <!-- end row -->
-                                <h4 class="font-size-18 text-muted mt-2 text-center">Welcome Back !</h4>
-                                <p class="mb-5 text-center">Sign in to continue to Upzet.</p>
-                                <form class="form-horizontal" action="index.html">
-
+                                <h4 class="font-size-20 mt-2 text-center text-black">Login</h4>
+                                <p class="mb-5 text-center">Silahkan masukan username dan password.</p>
+                                <form class="form-horizontal">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-4">
@@ -29,31 +27,17 @@
                                                 <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="customControlInline">
-                                                        <label class="form-check-label" for="customControlInline">Remember me</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-7">
-                                                    <div class="text-md-end mt-3 mt-md-0">
-                                                        <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
-                                                    </div>
-                                                </div>
+                                            <div class="mt-3 mt-md-0">
+                                                <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
                                             </div>
                                             <div class="d-grid mt-4">
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Log In</button>
+                                                <button @click="handleSubmit" class="btn btn-primary button-rounded waves-effect waves-light" type="submit">Login</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-5 text-center">
-                        <p class="text-white-50">Don't have an account ? <a href="auth-register.html" class="fw-medium text-primary"> Register </a> </p>
-                        <p class="text-white-50">© 2024 Upzet. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
                     </div>
                 </div>
             </div>
@@ -91,7 +75,13 @@ export default {
     },
     components: {Field, Form, ErrorMessage},
     methods: {
-        async handleSubmit() {
+        handleSubmit() {
+            localStorage.setItem('token', '123123123')
+            localStorage.setItem('role', 'ketua')
+
+            this.$router.push({ name: 'home' })
+        },
+        async handleSubmitBack() {
             try {
                 this.fetch = true
                 const signin = await ApiCore.store(`${apiEndpoint.AUTHENTICATION}/signin`, {email: this.email, password: this.password, role: this.role})
