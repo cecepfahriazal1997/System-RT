@@ -14,6 +14,14 @@
     -o-border-radius: 10px;
 }
 
+.custom-rounded-medium {
+    border-radius: 12px !important;
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+    -ms-border-radius: 12px !important;
+    -o-border-radius: 12px !important;
+}
+
 .custom-rounded {
     border-radius: 20px !important;
     -webkit-border-radius: 20px !important;
@@ -43,4 +51,9 @@
 .topnav .navbar-nav .nav-link.active{
     color:white !important;
     font-weight: bold;
+}
+
+.footer {
+    height: 40px;
+    padding: 10px !important;
 }
