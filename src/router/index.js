@@ -9,6 +9,7 @@ import Signin from '../views/authentication/Signin.vue'
 
 // Master Data
 import ListEducation from '../views/master-data/education/List.vue'
+import FormEducation from '../views/master-data/education/Form.vue'
 
 import NotFound from '../views/404.vue'
 
@@ -57,11 +58,11 @@ const routes = [
         }
     },
     {
-        path: '/master-education-form/:id',
+        path: '/master-education/form/:id?',
         name: 'education.form',
-        component: ListEducation,
+        component: FormEducation,
         meta: {
-            title: `${nameApplication} | Master Pendidikan`,
+            title: `${nameApplication} | Form Master Pendidikan`,
             footer: true,
             navbar: true,
         }

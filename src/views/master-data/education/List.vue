@@ -11,7 +11,7 @@
                                     <h4 class="mb-sm-0">Master Data Pendidikan</h4>
                                     <div class="d-flex">
                                         <button class="btn btn-light button-rounded" type="button">Hapus Terpilih</button>
-                                        <button class="btn btn-primary button-rounded ms-2" type="button">Tambah</button>
+                                        <router-link to="/master-education/form" class="btn btn-primary button-rounded ms-2" type="button">Tambah Baru</router-link>
                                     </div>
                                 </div>
                             </div>

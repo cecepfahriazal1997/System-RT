@@ -29,6 +29,11 @@
     -o-border-radius: var(--radius-medium) !important;
 }
 
+.card-footer-custom-radius-medium {
+    border-bottom-left-radius: var(--radius-medium) !important;
+    border-bottom-right-radius: var(--radius-medium) !important;
+}
+
 .custom-rounded {
     border-radius: var(--radius-extra-large) !important;
     -webkit-border-radius: var(--radius-extra-large) !important;
