@@ -2,7 +2,6 @@
     <main>
         <div id="layout-wrapper">
             <div class="main-content">
-
                 <div class="page-content">
                     <div class="container-fluid">
                         <!-- title of page -->
@@ -430,9 +429,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Page-content -->
             </div>
-            <!-- end main content-->
         </div>
     </main>
 </template>
