@@ -167,3 +167,13 @@
     -ms-border-radius: var(--radius-default);
     -o-border-radius: var(--radius-default);
 }
+
+.pagination-number {
+    min-width: 60px;
+    border: 1px solid #f0f0f0;
+    border-radius: var(--radius-default);
+    -webkit-border-radius: var(--radius-default);
+    -moz-border-radius: var(--radius-default);
+    -ms-border-radius: var(--radius-default);
+    -o-border-radius: var(--radius-default);
+}

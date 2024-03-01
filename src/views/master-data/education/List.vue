@@ -10,7 +10,7 @@
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                     <h4 class="mb-sm-0">Master Data Pendidikan</h4>
                                     <div class="d-flex">
-                                        <button class="btn btn-secondary button-rounded" type="button">Hapus Terpilih</button>
+                                        <button class="btn btn-light button-rounded" type="button">Hapus Terpilih</button>
                                         <button class="btn btn-primary button-rounded ms-2" type="button">Tambah</button>
                                     </div>
                                 </div>
@@ -47,6 +47,11 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <Pagination></Pagination>
                             </div>
                         </div>
                     </div>
