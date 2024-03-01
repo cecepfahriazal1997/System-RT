@@ -1,8 +1,8 @@
 <template>
-    <footer class="footer bg-primary text-white">
+    <footer class="footer">
         <div class="container-fluid">
             <div class="d-flex justify-content-center align-items-center">
-                <div>Copyright © 2024 Wargakeun. All right reserved</div>
+                <div class="text-muted font-size-12">Copyright © 2024 Wargakeun. All right reserved</div>
             </div>
         </div>
     </footer>

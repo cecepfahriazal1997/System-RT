@@ -54,6 +54,29 @@
 }
 
 .footer {
-    height: 40px;
+    height: auto;
     padding: 10px !important;
+}
+
+.btn-floating-circle-left {
+    position: absolute;
+    left: 0;
+    bottom: 45%;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.bg-gray-level-two {
+    background-color: #E3E1D9;
+}
+
+.spacer-medium {
+    margin-top: 2rem;
 }
