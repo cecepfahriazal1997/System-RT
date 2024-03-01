@@ -7,7 +7,7 @@
                         <!-- title of page -->
                         <div class="row">
                             <div class="col-12 mt-3">
-                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <div class="page-title-box d-sm-flex align-items-start justify-content-between">
                                     <h4 class="mb-sm-0">Data Penduduk</h4>
                                     <div class="d-flex">
                                         <button class="btn btn-light button-rounded" type="button">Hapus Terpilih</button>
@@ -73,37 +73,41 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p>Menampilkan 100 data penduduk</p>
-                                <table class="table table-custom-card">
-                                    <thead>
-                                        <tr>
-                                            <th width="2%"><input type="checkbox" class="form-check-input" /></th>
-                                            <th>NIK</th>
-                                            <th>Nama</th>
-                                            <th>Status</th>
-                                            <th>Email</th>
-                                            <th>Telepon</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="item in [1,2,3,4,5]">
-                                            <td class="middle-item"><input type="checkbox" class="form-check-input" /></td>
-                                            <td class="middle-item">1001910110{{ item }}</td>
-                                            <td class="middle-item">
-                                                <div>Ahmad Wibowo</div>
-                                                <span class="badge badge-soft-primary" v-if="item == 1">Pindahan</span>
-                                            </td>
-                                            <td class="middle-item">Lansia</td>
-                                            <td class="middle-item">test@gmail.com</td>
-                                            <td class="middle-item">08981981239</td>
-                                            <td class="middle-item" align="right">
-                                                <button type="button" class="btn btn-square border bg-info text-white me-2"><i class="mdi mdi-circle-edit-outline fs-4"></i></button>
-                                                <button type="button" class="btn btn-square border bg-white me-2"><i class="mdi mdi-trash-can-outline fs-4"></i></button>
-                                                <button type="button" class="btn btn-square border bg-white"><i class="mdi mdi-dots-vertical fs-4"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-custom-card">
+                                        <thead>
+                                            <tr>
+                                                <th width="2%"><input type="checkbox" class="form-check-input" /></th>
+                                                <th>NIK</th>
+                                                <th>Nama</th>
+                                                <th>Status</th>
+                                                <th>Email</th>
+                                                <th>Telepon</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="item in [1,2,3,4,5]">
+                                                <td class="middle-item"><input type="checkbox" class="form-check-input" /></td>
+                                                <td class="middle-item">1001910110{{ item }}</td>
+                                                <td class="middle-item">
+                                                    <div>Ahmad Wibowo</div>
+                                                    <span class="badge badge-soft-primary" v-if="item == 1">Pindahan</span>
+                                                </td>
+                                                <td class="middle-item">Lansia</td>
+                                                <td class="middle-item">test@gmail.com</td>
+                                                <td class="middle-item">08981981239</td>
+                                                <td class="middle-item">
+                                                    <div class="d-flex justify-content-end align-items-center">
+                                                        <button type="button" class="btn btn-square border bg-info text-white me-2"><i class="mdi mdi-circle-edit-outline fs-4"></i></button>
+                                                        <button type="button" class="btn btn-square border bg-white me-2"><i class="mdi mdi-trash-can-outline fs-4"></i></button>
+                                                        <button type="button" class="btn btn-square border bg-white"><i class="mdi mdi-dots-vertical fs-4"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="row justify-content-center">
