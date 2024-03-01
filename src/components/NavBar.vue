@@ -109,7 +109,7 @@
                                     <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
                                 </div>
                             </router-link>
-                            <a href="#" v-else class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
+                            <a href="javascript:void(0)" v-else class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
                                 </div>
@@ -161,7 +161,7 @@ export default {
                 {
                     title: 'Data Penduduk',
                     icon: 'mdi mdi-card-account-details-outline',
-                    url: '/signin',
+                    url: '/resident',
                     child: []
                 },
                 {

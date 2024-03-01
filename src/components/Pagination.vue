@@ -1,5 +1,5 @@
 <template>
-    <nav class="mt-5">
+    <nav>
         <ul class="d-flex p-0" style="gap: 0.5rem;">
             <button type="button" class="btn btn-secondary border btn-square" 
             :class="{ disabled: !prev }"

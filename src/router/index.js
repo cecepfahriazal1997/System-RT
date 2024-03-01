@@ -10,6 +10,9 @@ import Signin from '../views/authentication/Signin.vue'
 // Master Data
 import ListEducation from '../views/master-data/education/List.vue'
 import FormEducation from '../views/master-data/education/Form.vue'
+// Residents
+import ListResident from '../views/resident/List.vue'
+import FormResident from '../views/resident/Form.vue'
 
 import NotFound from '../views/404.vue'
 
@@ -63,6 +66,26 @@ const routes = [
         component: FormEducation,
         meta: {
             title: `${nameApplication} | Form Master Pendidikan`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/resident',
+        name: 'resident',
+        component: ListResident,
+        meta: {
+            title: `${nameApplication} | Data Penduduk`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/resident/form/:id?',
+        name: 'resident.form',
+        component: FormResident,
+        meta: {
+            title: `${nameApplication} | Form Penduduk`,
             footer: true,
             navbar: true,
         }

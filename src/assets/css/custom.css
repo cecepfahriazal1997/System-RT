@@ -21,6 +21,21 @@
     -o-border-radius: var(--radius-default);
 }
 
+.select-rounded {
+    font-weight: bold;
+    border: 1px solid #f0f0f0;
+    border-radius: var(--radius-default);
+    -webkit-border-radius: var(--radius-default);
+    -moz-border-radius: var(--radius-default);
+    -ms-border-radius: var(--radius-default);
+    -o-border-radius: var(--radius-default);
+}
+
+.padding-vertical-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .custom-rounded-medium {
     border-radius: var(--radius-medium) !important;
     -webkit-border-radius: var(--radius-medium) !important;
@@ -51,8 +66,18 @@
     -o-border-radius: var(--radius-default) !important;
 }
 
+.button-rounded-sm {
+    padding: 5px !important;
+    border-radius: var(--radius-default) !important;
+    -webkit-border-radius: var(--radius-default) !important;
+    -moz-border-radius: var(--radius-default) !important;
+    -ms-border-radius: var(--radius-default) !important;
+    -o-border-radius: var(--radius-default) !important;
+}
+
 .form-control {
     padding: 10px !important;
+    border-color: #f0f0f0 !important;
     border-radius: var(--radius-default) !important;
     -webkit-border-radius: var(--radius-default) !important;
     -moz-border-radius: var(--radius-default) !important;
