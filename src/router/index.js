@@ -6,6 +6,10 @@ import { ApiCore } from '../services/core'
 
 import Home from '../views/Home.vue'
 import Signin from '../views/authentication/Signin.vue'
+
+// Master Data
+import ListEducation from '../views/master-data/education/List.vue'
+
 import NotFound from '../views/404.vue'
 
 const nameApplication = import.meta.env.VITE_APP_TITLE
@@ -40,6 +44,26 @@ const routes = [
             title: `${nameApplication} | Login`,
             footer: false,
             navbar: false,
+        }
+    },
+    {
+        path: '/master-education',
+        name: 'education',
+        component: ListEducation,
+        meta: {
+            title: `${nameApplication} | Master Pendidikan`,
+            footer: true,
+            navbar: true,
+        }
+    },
+    {
+        path: '/master-education-form/:id',
+        name: 'education.form',
+        component: ListEducation,
+        meta: {
+            title: `${nameApplication} | Master Pendidikan`,
+            footer: true,
+            navbar: true,
         }
     },
 ]

@@ -146,7 +146,7 @@ export default {
                     child: [
                         {
                             title: 'Pendidikan',
-                            url: '/education',
+                            url: '/master-education',
                         },
                         {
                             title: 'Pekerjaan',
