@@ -207,3 +207,7 @@
     -ms-border-radius: var(--radius-default);
     -o-border-radius: var(--radius-default);
 }
+
+.dropdown-menu.show {
+    right: 0 !important;
+}
