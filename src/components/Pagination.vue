@@ -1,24 +1,20 @@
 <template>
-    <nav class="mt-5 align-self-center">
-        <ul class="custom-pagination d-flex p-0" style="gap: 1rem;">
-            <button type="button" class="btn btn-light border text_white custom-pagination-backward d-flex justify-content-center" 
+    <nav>
+        <ul class="d-flex p-0" style="gap: 0.5rem;">
+            <button type="button" class="btn btn-secondary border btn-square" 
             :class="{ disabled: !prev }"
             :disabled="!prev"
             @click="fetch('prev')">
-                <span class="material-symbols-rounded">
-                    keyboard_arrow_left
-                </span>
+                <i class="mdi mdi-chevron-left fs-3"></i>
             </button>
-            <div class="bg-secondary d-flex align-items-center justify-content-center">
-                <div class="custom-pagination-page-item text-primary font-weight-semibold">{{ page }}</div>
+            <div class="d-flex align-items-center justify-content-center bg-white pagination-number">
+                <div class="fs-5 fw-bold">{{ page }}</div>
             </div>
-            <button type="button" class="btn btn-primary text_white custom-pagination-forward d-flex justify-content-center"
+            <button type="button" class="btn btn-primary border btn-square"
             :class="{ disabled: !next }"
             :disabled="!next"
             @click="fetch('next')">
-                <span class="material-symbols-rounded">
-                    keyboard_arrow_right
-                </span>
+                <i class="mdi mdi-chevron-right fs-3"></i>
             </button>
         </ul>
     </nav>

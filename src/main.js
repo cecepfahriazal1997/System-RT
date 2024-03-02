@@ -37,7 +37,7 @@ import './assets/css/custom.css'
 import 'bootstrap'
 
 // import components for global
-// import Pagination from './components/Pagination.vue'
+import Pagination from './components/Pagination.vue'
 // import EmptyState from './components/EmptyState.vue'
 
 const app = createApp(App)
@@ -64,7 +64,7 @@ app.use(Toast, {
 
 app.config.productionTip = false
 
-// app.component(Pagination.name, Pagination)
+app.component(Pagination.name, Pagination)
 // app.component(EmptyState.name, EmptyState)
 app.component('flat-pickr', VueFlatpickr);
 

@@ -104,12 +104,17 @@
                 <div class="collapse navbar-collapse" id="topnav-menu-content">
                     <ul class="navbar-nav">
                         <li class="nav-item" :class="{'dropdown': item.child.length}" v-for="item in listMenu">
-                            <router-link :to="item.url" class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}" @click="item.active = !item.active">
+                            <router-link v-if="item.url" :to="item.url" class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
                                 </div>
                             </router-link>
-                            <div class="dropdown-menu" :class="{'show': item.active}" aria-labelledby="topnav-apps" v-if="item.child.length">
+                            <a href="javascript:void(0)" v-else class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="topnav-apps" v-if="item.child.length">
                                 <router-link :to="child.url" class="dropdown-item d-flex align-items-center justify-content-between" v-for="child in item.child">{{child.title}} <i class="mdi mdi-arrow-right" v-if="item.child.length"></i></router-link>
                             </div>
                         </li>
@@ -131,19 +136,17 @@ export default {
                 {
                     title: 'Dashboard',
                     icon: 'mdi mdi-view-dashboard-outline',
-                    path: '#',
                     url: '/',
                     child: []
                 },
                 {
                     title: 'Data Master',
                     icon: 'mdi mdi-database-outline',
-                    path: '#',
-                    url: '/master',
+                    url: '',
                     child: [
                         {
                             title: 'Pendidikan',
-                            url: '/education',
+                            url: '/master-education',
                         },
                         {
                             title: 'Pekerjaan',
@@ -158,21 +161,18 @@ export default {
                 {
                     title: 'Data Penduduk',
                     icon: 'mdi mdi-card-account-details-outline',
-                    path: '#',
-                    url: '/signin',
+                    url: '/resident',
                     child: []
                 },
                 {
                     title: 'Jadwal',
                     icon: 'mdi mdi-calendar-month-outline',
-                    path: '#',
                     url: '/signin',
                     child: []
                 },
                 // {
                 //     title: 'Keuangan',
                 //     icon: 'mdi mdi-clipboard-check-outline',
-                //     path: '#',
                 //     url: '/signin',
                 //     child: [
                 //         {
