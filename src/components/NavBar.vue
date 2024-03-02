@@ -80,11 +80,10 @@
                 </div>
 
                 <div class="dropdown d-inline-block user-dropdown">
-                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="https://themesdesign.in/upzet/layouts/assets/images/users/avatar-2.jpg"
-                            alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ms-1">Kevin</span>
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" :src="$store.state.user.picture" alt="Header Avatar" v-if="$store.state.user.picture">
+                        <img class="rounded-circle header-profile-user" src="@/assets/images/default-avatar.png" alt="Header Avatar" v-else>
+                        <span class="d-none d-xl-inline-block ms-1">{{$store.state.user.fullname}}</span>
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
