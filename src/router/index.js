@@ -119,18 +119,17 @@ router.beforeEach((to, from, next) => {
 
     if (isAllow) {
         if (localData && !authRequired) {
-            next()
-            // ApiCore.get(`${apiEnpoint.ACCOUNT}/info`, null, false)
-            //         .then((response) => {
-            //             if ('status' in response && !response.status) {
-            //                 localStorage.removeItem('token')
-            //                 next({name: 'home'})
-            //             } else {
-            //                 stores.commit('setuser', response)
-            //                 next()
-            //             }
-            //         })
-            //         .catch(() => {})
+            ApiCore.get(`${apiEnpoint.ACCOUNT}/info`, null, false)
+                    .then((response) => {
+                        if ('status' in response && !response.status) {
+                            localStorage.removeItem('token')
+                            next({name: 'home'})
+                        } else {
+                            stores.commit('setuser', response)
+                            next()
+                        }
+                    })
+                    .catch(() => {})
         } else {
             if (to.path == '/') {
                 next({name: 'signin'})
