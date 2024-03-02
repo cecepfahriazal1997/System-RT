@@ -11,7 +11,7 @@
                                     <h4 class="mb-sm-0">Data Penduduk</h4>
                                     <div class="d-flex">
                                         <button class="btn btn-light button-rounded" type="button">Hapus Terpilih</button>
-                                        <router-link to="/master-education/form" class="btn btn-primary button-rounded ms-2" type="button">Tambah Baru</router-link>
+                                        <router-link to="/resident/form" class="btn btn-primary button-rounded ms-2">Tambah Penduduk Baru</router-link>
                                     </div>
                                 </div>
                             </div>

@@ -115,7 +115,11 @@
 }
 
 .spacer-medium {
-    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.spacer-small {
+    margin-bottom: 1.5rem;
 }
 
 .input-group-left {
@@ -188,8 +192,8 @@
 }
 
 .btn-square {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     padding: 0 !important;
     border-radius: var(--radius-default);
     -webkit-border-radius: var(--radius-default);
