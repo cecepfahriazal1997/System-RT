@@ -14,26 +14,29 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card custom-rounded-medium">
-                                    <div class="card-body">
-                                        <h6 class="mb-3">Silahkan lengkapi form dibawah ini dengan benar.</h6>
-                                        <div class="spacer-medium"></div>
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Kode</label>
-                                            <input type="text" class="form-control custom-rounded-medium" placeholder="Masukan Kode" />
+                                <Form :validation-schema="schema" @submit="handleSubmit">
+                                    <div class="card custom-rounded-medium">
+                                        <div class="card-body">
+                                            <h6 class="mb-3">Silahkan lengkapi form dibawah ini dengan benar.</h6>
+                                            <div class="spacer-medium"></div>
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">Kode</label>
+                                                <Field type="text" name="code" class="form-control custom-rounded-medium" placeholder="Masukan kode pendidikan (opsional)" v-model="form.code" />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">Nama</label>
+                                                <Field type="text" name="name" class="form-control custom-rounded-medium" placeholder="Masukan nama pendidikan" v-model="form.name" />
+                                                <ErrorMessage name="name" :class="'text-danger'" />
+                                            </div>
                                         </div>
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Nama</label>
-                                            <input type="text" class="form-control custom-rounded-medium" placeholder="Masukan Kode" />
+                                        <div class="card-footer card-footer-custom-radius-medium">
+                                            <div class="d-flex justify-content-end">
+                                                <router-link to="/master-education" class="btn border-light bg-white custom-rounded-medium me-2">Kembali</router-link>
+                                                <button type="submit" class="btn btn-primary custom-rounded-medium">Simpan</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer card-footer-custom-radius-medium">
-                                        <div class="d-flex justify-content-end">
-                                            <router-link to="/master-education" class="btn border-light bg-white custom-rounded-medium me-2">Kembali</router-link>
-                                            <router-link to="/master-education" class="btn btn-primary custom-rounded-medium">Simpan</router-link>
-                                        </div>
-                                    </div>
-                                </div>
+                                </Form>
                             </div>
                         </div>
                     </div>
@@ -47,41 +50,60 @@ import simplebar from 'simplebar-vue';
 import 'simplebar-core/dist/simplebar.css';
 
 import { ApiCore } from '@/services/core';
-// import apiEnpoint from '@/services/api-endpoint';
+import apiEndpoint from '@/services/api-endpoint';
+
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
+
 export default {
     name: 'MasterEducation',
     data() {
         return {
-            list: [],
-            pagination: {
-                prev: false,
-                next: false,
-                page: 1,
-                limit: 15,
-                total: 0
+            form: {
+                code: '',
+                name: ''
             },
         }
     },
     components: {
-        simplebar,
+        simplebar, Field, Form, ErrorMessage
+    },
+    setup() {
+        const schema = yup.object({
+            name: yup.string().required('Masukan nama'),
+        });
+
+        return {
+            schema
+        }
     },
     mounted() {
-        // this.fetchDataAnnouncement(this.pagination.page)
+        if (this.$route.params.id)
+            this.fetchData()
     },
     methods: {
-        fetchDataAnnouncement(page) {
-            ApiCore.get(`payment-arrears`, {
-                page: page,
-                limit: this.pagination.limit,
-            }).then((result) => {
+        fetchData() {
+            ApiCore.get(`${apiEndpoint.ADMINISTRATION_MASTER}/education/${this.$route.params.id}`).then((result) => {
                 if (result.status) {
-                    this.list = result.data.data
+                    this.form = result.data
                 }
-                this.pagination.prev = result.pagination.prev
-                this.pagination.next = result.pagination.next
-                this.pagination.page = result.pagination.page
-                this.pagination.total = result.pagination.total
             })
+        },
+        async handleSubmit() {
+            try {
+                this.fetch = true
+                const result = await ApiCore.store(`${apiEndpoint.ADMINISTRATION_MASTER}/education/save`, this.form)
+                this.fetch = false
+                if (result.status) {
+                    this.$router.push({name: 'education'})
+                    this.$toast.success(result.message);
+                } else {
+                    this.$toast.error(result.message);
+                }
+            } catch(error) {
+                this.fetch = false
+                this.$toast.error(error.message);
+            }
         }
     }
 }
