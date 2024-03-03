@@ -1,8 +1,7 @@
 const apiEnpoint = {
     AUTHENTICATION: 'auth',
     ACCOUNT: 'users',
-    LOAN: 'pinjaman',
-    INVESMENT: 'invesment',
+    ADMINISTRATION_MASTER: 'administrator/master'
 }
 
 export default apiEnpoint

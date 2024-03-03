@@ -80,11 +80,10 @@
                 </div>
 
                 <div class="dropdown d-inline-block user-dropdown">
-                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="https://themesdesign.in/upzet/layouts/assets/images/users/avatar-2.jpg"
-                            alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ms-1">Kevin</span>
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" :src="$store.state.user.picture" alt="Header Avatar" v-if="$store.state.user.picture">
+                        <img class="rounded-circle header-profile-user" src="@/assets/images/default-avatar.png" alt="Header Avatar" v-else>
+                        <span class="d-none d-xl-inline-block ms-1">{{$store.state.user.fullname}}</span>
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
@@ -103,21 +102,25 @@
             <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
                 <div class="collapse navbar-collapse" id="topnav-menu-content">
                     <ul class="navbar-nav">
-                        <li class="nav-item" :class="{'dropdown': item.child.length}" v-for="item in listMenu">
-                            <router-link v-if="item.url" :to="item.url" class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
+                        <template v-for="item in listMenu">
+                            <li class="nav-item" :class="{'dropdown': item.child.length}" v-if="item.role.indexOf($store.state.user.role) != -1 || item.role == 'all'">
+                                <router-link v-if="item.url" :to="item.url" class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
+                                    </div>
+                                </router-link>
+                                <a href="javascript:void(0)" v-else class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-apps" v-if="item.child.length">
+                                    <template v-for="child in item.child">
+                                        <router-link :to="child.url" class="dropdown-item d-flex align-items-center justify-content-between" v-if="child.role.indexOf($store.state.user.role) != -1 || child.role == 'all'">{{child.title}} <i class="mdi mdi-arrow-right" v-if="item.child.length"></i></router-link>
+                                    </template>
                                 </div>
-                            </router-link>
-                            <a href="javascript:void(0)" v-else class="nav-link" :class="{'dropdown-toggle arrow-none': item.child.length}">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <i class="me-2 font-size-20" :class="item.icon"></i> {{item.title}} <div class="arrow-down" v-if="item.child.length"></div>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="topnav-apps" v-if="item.child.length">
-                                <router-link :to="child.url" class="dropdown-item d-flex align-items-center justify-content-between" v-for="child in item.child">{{child.title}} <i class="mdi mdi-arrow-right" v-if="item.child.length"></i></router-link>
-                            </div>
-                        </li>
+                            </li>
+                        </template>
                     </ul>
                 </div>
             </nav>
@@ -137,24 +140,39 @@ export default {
                     title: 'Dashboard',
                     icon: 'mdi mdi-view-dashboard-outline',
                     url: '/',
+                    role: 'all',
                     child: []
                 },
                 {
                     title: 'Data Master',
                     icon: 'mdi mdi-database-outline',
                     url: '',
+                    role: ['superadmin', 'admin'],
                     child: [
                         {
                             title: 'Pendidikan',
                             url: '/master-education',
+                            role: ['superadmin']
                         },
                         {
                             title: 'Pekerjaan',
                             url: '/work',
+                            role: ['superadmin']
+                        },
+                        {
+                            title: 'Data RW',
+                            url: '/master-rw',
+                            role: ['superadmin']
+                        },
+                        {
+                            title: 'Data RT',
+                            url: '/master-rt',
+                            role: ['superadmin']
                         },
                         {
                             title: 'Organisasi',
                             url: '/signin',
+                            role: ['admin']
                         }
                     ]
                 },
@@ -162,12 +180,14 @@ export default {
                     title: 'Data Penduduk',
                     icon: 'mdi mdi-card-account-details-outline',
                     url: '/resident',
+                    role: ['superadmin', 'admin', 'rt'],
                     child: []
                 },
                 {
                     title: 'Jadwal',
                     icon: 'mdi mdi-calendar-month-outline',
                     url: '/signin',
+                    role: ['rt'],
                     child: []
                 },
                 // {

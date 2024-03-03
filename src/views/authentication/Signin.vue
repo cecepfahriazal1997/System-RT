@@ -15,27 +15,29 @@
                                 <!-- end row -->
                                 <h4 class="font-size-20 mt-2 text-center text-black">Login</h4>
                                 <p class="mb-5 text-center">Silahkan masukan username dan password.</p>
-                                <form class="form-horizontal">
+                                <Form :validation-schema="schema" @submit="handleSubmit" class="form-horizontal">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-4">
                                                 <label class="form-label" for="username">Username</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                <Field type="text" class="form-control" id="username" name="username" placeholder="Enter username" v-model="username" />
+                                                <ErrorMessage name="username" :class="'text-danger'" />
                                             </div>
                                             <div class="mb-4">
                                                 <label class="form-label" for="userpassword">Password</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
+                                                <Field type="password" class="form-control" id="userpassword" name="password" v-model="password" placeholder="Enter password" />
+                                                <ErrorMessage name="password" :class="'text-danger'" />
                                             </div>
 
                                             <div class="mt-3 mt-md-0">
-                                                <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                                <a href="javascript:void(0)" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
                                             </div>
                                             <div class="d-grid mt-4">
-                                                <button @click="handleSubmit" class="btn btn-primary button-rounded waves-effect waves-light" type="submit">Login</button>
+                                                <button class="btn btn-primary button-rounded waves-effect waves-light" type="submit">Login</button>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </Form>
                             </div>
                         </div>
                     </div>
@@ -57,15 +59,14 @@ export default {
     data() {
         return {
             loader: null,
-            email: '',
+            username: '',
             password: '',
-            role: this.$route.params.role,
             fetch: false,
         }
     },
     setup() {
         const schema = yup.object({
-            email: yup.string().email('Masukan email yang valid').required('Masukan email'),
+            username: yup.string().required('Masukan username'),
             password: yup.string().required('Masukan password'),
         });
 
@@ -75,23 +76,15 @@ export default {
     },
     components: {Field, Form, ErrorMessage},
     methods: {
-        handleSubmit() {
-            localStorage.setItem('token', '123123123')
-            localStorage.setItem('role', 'ketua')
-
-            this.$router.push({ name: 'home' })
-        },
-        async handleSubmitBack() {
+        async handleSubmit() {
             try {
                 this.fetch = true
-                const signin = await ApiCore.store(`${apiEndpoint.AUTHENTICATION}/signin`, {email: this.email, password: this.password, role: this.role})
+                const signin = await ApiCore.store(`${apiEndpoint.AUTHENTICATION}/signin`, {username: this.username, password: this.password})
                 this.fetch = false
                 if (signin.status) {
                     this.$toast.success(signin.message);
                     localStorage.removeItem('token')
-                    localStorage.removeItem('role')
                     localStorage.setItem('token', signin.user.key)
-                    localStorage.setItem('role', this.role)
                     setTimeout(() => {
                         window.location.href = '/'
                     }, 1000);
