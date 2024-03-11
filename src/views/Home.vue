@@ -38,13 +38,6 @@
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                             </div>
                                         </div>
-                                        <div class="carousel-item">
-                                            <div style="background-image: url('https://themesdesign.in/upzet/layouts/assets/images/small/img-4.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; width: 100%; min-height: 500px;" class="custom-rounded-medium"></div>
-                                            <div class="carousel-caption d-none d-md-block text-white-50">
-                                                <h5 class="text-white">Third slide label</h5>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            </div>
-                                        </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselExampleCaption" role="button" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -71,7 +64,7 @@
                                             </div>
                                             <div class="d-block ms-3">
                                                 <p class="mb-1 text-dark">Jumlah Penduduk</p>
-                                                <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">562</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">{{statistic.resident_total_all}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +83,7 @@
                                             </div>
                                             <div class="d-block ms-3">
                                                 <p class="mb-1 text-dark">Jumlah Pria</p>
-                                                <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">132</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">{{statistic.resident_total_male}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +102,7 @@
                                             </div>
                                             <div class="d-block ms-3">
                                                 <p class="mb-1 text-dark">Jumlah Wanita</p>
-                                                <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">430</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">{{statistic.resident_total_female}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +130,7 @@
                                                     </div>
                                                     <div class="d-block ms-3">
                                                         <p class="mb-1 text-dark">Jumlah Kartu Keluarga</p>
-                                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">12</h1> <span class="font-size-12 mb-1">keluarga</span></div>
+                                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">{{statistic.card_family_total_all}}</h1> <span class="font-size-12 mb-1">keluarga</span></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,7 +143,7 @@
                                                     </div>
                                                     <div class="d-block ms-3">
                                                         <p class="mb-1 text-dark">Kepala Keluarga Pria</p>
-                                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">8</h1> <span class="font-size-12 mb-1">keluarga</span></div>
+                                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">{{statistic.card_family_total_male}}</h1> <span class="font-size-12 mb-1">keluarga</span></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,7 +156,7 @@
                                                     </div>
                                                     <div class="d-block ms-3">
                                                         <p class="mb-1 text-dark">Kepala Keluarga Wanita</p>
-                                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">4</h1> <span class="font-size-12 mb-1">keluarga</span></div>
+                                                        <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">{{statistic.card_family_total_female}}</h1> <span class="font-size-12 mb-1">keluarga</span></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,7 +186,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="d-block ms-3">
-                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-danger">5</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-danger">{{statistic.growth_total_dead}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                                         </div>
                                                     </div>
                                                     <p class="mb-1 text-black">Penduduk Meninggal</p>
@@ -208,7 +201,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="d-block ms-3">
-                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">5</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-success">{{statistic.growth_total_enter}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                                         </div>
                                                     </div>
                                                     <p class="mb-1 text-black">Penduduk Masuk</p>
@@ -223,7 +216,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="d-block ms-3">
-                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">5</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-warning">{{statistic.growth_total_out}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                                         </div>
                                                     </div>
                                                     <p class="mb-1 text-black">Penduduk Keluar</p>
@@ -238,7 +231,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="d-block ms-3">
-                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">5</h1> <span class="font-size-12 mb-1">orang</span></div>
+                                                            <div class="d-flex align-items-end"><h1 class="mb-0 me-2 fw-bold text-info">{{statistic.growth_total_born}}</h1> <span class="font-size-12 mb-1">orang</span></div>
                                                         </div>
                                                     </div>
                                                     <p class="mb-1 text-black">Penduduk Lahir</p>
@@ -253,7 +246,7 @@
                             <!-- end col -->
                         </div>
                         <!-- statistic of finance -->
-                        <div class="row">
+                        <div class="row d-none">
                             <div class="col-md-4 col-sm-6">
                                 <div class="card custom-rounded-medium bg-success">
                                     <div class="card-body">
@@ -265,7 +258,7 @@
                                             </div>
                                             <div class="d-block ms-3 text-white">
                                                 <p class="mb-1">Jumlah Uang Kas</p>
-                                                <div class="d-flex align-items-end mb-2"><span class="font-size-16 fw-bold mb-1">Rp. </span><h2 class="mb-0 ms-2 fw-bold text-white">200.000</h2></div>
+                                                <div class="d-flex align-items-end mb-2"><span class="font-size-16 fw-bold mb-1">Rp. </span><h2 class="mb-0 ms-2 fw-bold text-white">{{statistic.finance_balance}}</h2></div>
                                                 <button class="btn btn-sm btn-light custom-rounded-medium btn-white text-success fw-bold">Lihat Rincian</button>
                                             </div>
                                         </div>
@@ -285,7 +278,7 @@
                                             </div>
                                             <div class="d-block ms-3 text-white">
                                                 <p class="mb-1">Jumlah Uang Iuran</p>
-                                                <div class="d-flex align-items-end mb-2"><span class="font-size-16 fw-bold mb-1">Rp. </span><h2 class="mb-0 ms-2 fw-bold text-white">100.000</h2></div>
+                                                <div class="d-flex align-items-end mb-2"><span class="font-size-16 fw-bold mb-1">Rp. </span><h2 class="mb-0 ms-2 fw-bold text-white">{{statistic.finance_income}}</h2></div>
                                                 <button class="btn btn-sm btn-light custom-rounded-medium btn-white text-info fw-bold">Lihat Rincian</button>
                                             </div>
                                         </div>
@@ -305,7 +298,7 @@
                                             </div>
                                             <div class="d-block ms-3 text-white">
                                                 <p class="mb-1">Jumlah Pengeluaran</p>
-                                                <div class="d-flex align-items-end mb-2"><span class="font-size-16 fw-bold mb-1">Rp. </span><h2 class="mb-0 ms-2 fw-bold text-white">100.000</h2></div>
+                                                <div class="d-flex align-items-end mb-2"><span class="font-size-16 fw-bold mb-1">Rp. </span><h2 class="mb-0 ms-2 fw-bold text-white">{{statistic.finance_outcome}}</h2></div>
                                                 <button class="btn btn-sm btn-light custom-rounded-medium btn-white text-danger fw-bold">Lihat Rincian</button>
                                             </div>
                                         </div>
@@ -316,8 +309,8 @@
                             </div>
                         </div>
                         <!-- schedule -->
-                        <div class="spacer-medium"></div>
-                        <div class="row">
+                        <div class="spacer-medium d-none"></div>
+                        <div class="row d-none">
                             <div class="d-flex align-items-end justify-content-between">
                                 <div class="d-block">
                                     <h1>Jadwal Kegiatan Minggu Ini</h1>
@@ -474,44 +467,43 @@
 <script>
 import simplebar from 'simplebar-vue';
 import 'simplebar-core/dist/simplebar.css';
-
-import { ApiCore } from '@/services/core';
-// import apiEnpoint from '@/services/api-endpoint';
+    
 export default {
     name: 'Home',
     data() {
         return {
-            list: [],
-            pagination: {
-                prev: false,
-                next: false,
-                page: 1,
-                limit: 15,
-                total: 0
+            statistic: {
+                resident_total_all: 0,
+                resident_total_male: 0,
+                resident_total_female: 0,
+                card_family_total_all: 0,
+                card_family_total_male: 0,
+                card_family_total_female: 0,
+                growth_total_dead: 0,
+                growth_total_enter: 0,
+                growth_total_out: 0,
+                growth_total_born: 0,
+                finance_balance: 0,
+                finance_income: 0,
+                finance_outcome: 0,
             },
+            graph: {
+                resident_by_age: [],
+                resident_by_help: [],
+                resident_by_marriage: [],
+                resident_by_work: [],
+                resident_by_education: [],
+                resident_by_religon: [],
+            },
+            listSchedule: [],
         }
     },
     components: {
         simplebar,
     },
     mounted() {
-        // this.fetchDataAnnouncement(this.pagination.page)
     },
     methods: {
-        fetchDataAnnouncement(page) {
-            ApiCore.get(`payment-arrears`, {
-                page: page,
-                limit: this.pagination.limit,
-            }).then((result) => {
-                if (result.status) {
-                    this.list = result.data.data
-                }
-                this.pagination.prev = result.pagination.prev
-                this.pagination.next = result.pagination.next
-                this.pagination.page = result.pagination.page
-                this.pagination.total = result.pagination.total
-            })
-        }
     }
 }
 </script>

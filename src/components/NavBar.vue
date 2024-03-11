@@ -21,11 +21,11 @@
 
                 <!-- App Search-->
                 <div class="d-flex align-items-center">
-                    <select class="form-select select-rounded-primary me-2">
-                        <option value="" v-for="item in [1,2,3,4,5,6,7,8,9]" class="bg-white text-dark">RW 0{{item}} &nbsp;</option>
+                    <select class="form-select select-rounded-primary me-2" style="width: 100px;" v-model="rwId" @change="changeArea()">
+                        <option v-for="item in listRW" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
                     </select>
-                    <select class="form-select select-rounded-primary">
-                        <option value="" v-for="item in [1,2,3,4,5,6,7,8,9]" class="bg-white text-dark">RT 0{{item}} &nbsp;</option>
+                    <select class="form-select select-rounded-primary" style="width: 100px;" v-model="rtId" @change="changeArea()">
+                        <option v-for="item in listRT" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
                     </select>
                 </div>
             </div>
@@ -131,6 +131,11 @@
 import simplebar from 'simplebar-vue';
 import 'simplebar-core/dist/simplebar.css';
 
+import { ApiCore } from '@/services/core';
+import apiEndpoint from '@/services/api-endpoint';
+
+import { find } from 'lodash'
+
 export default {
     name: 'NavBar',
     data() {
@@ -205,13 +210,47 @@ export default {
                 //         }
                 //     ]
                 // }
-            ]
+            ],
+            rwId: '',
+            rtId: '',
+            listRW: [],
         }
     },
     components: {
         simplebar,
     },
+    computed: {
+        listRT() {
+            const tmpListRT = find(this.listRW, {'id': this.rwId})?.rt
+            if (tmpListRT) {
+                if (!this.rtId)
+                    this.rtId = tmpListRT[0].id
+            }
+
+            return tmpListRT
+        },
+    },
+    mounted() {
+        this.fetchListRW()
+        this.rwId = localStorage.getItem('rwId')
+        this.rtId = localStorage.getItem('rtId')
+    },
     methods: {
+        fetchListRW() {
+            ApiCore.get(`${apiEndpoint.GENERAL}/rw`).then((result) => {
+                if (result.status) {
+                    this.listRW = result.data
+                    // if (!this.rwId)
+                        this.rwId = result.data[0].id
+                    // this.listRT = result.data[0].rt;
+                }
+            })
+        },
+        changeArea() {
+            this.$store.commit('setrwId', this.rwId)
+            this.$store.commit('setrtId', this.rtId)
+            this.$router.go(0);
+        },
         async logout() {
             this.$swal
                 .fire({
