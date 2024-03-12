@@ -79,7 +79,7 @@
                         <div class="spacer-medium"></div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>Menampilkan 100 data penduduk</p>
+                                <p>Menampilkan {{list.length}} data penduduk</p>
                                 <!-- IF TAB IS CARD FAMILY -->
                                 <div class="table-responsive-lg" v-if="currTab == 'card'">
                                     <table class="table table-custom-card">
@@ -136,7 +136,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="item in [1,2,3,4,5]">
+                                            <tr v-for="item in []">
                                                 <td class="middle-item"><input type="checkbox" class="form-check-input" /></td>
                                                 <td class="middle-item">1001910110{{ item }}</td>
                                                 <td class="middle-item">
@@ -169,9 +169,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center" v-if="pagination.total > 0">
                             <div class="col-auto">
-                                <Pagination></Pagination>
+                                <Pagination :page="pagination.page" :prev="pagination.prev" :next="pagination.next" v-on:fetchData="fetchData"></Pagination>
                             </div>
                         </div>
                     </div>

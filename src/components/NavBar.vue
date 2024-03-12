@@ -21,12 +21,17 @@
 
                 <!-- App Search-->
                 <div class="d-flex align-items-center">
-                    <select class="form-select select-rounded-primary me-2" style="width: 100px;" v-model="rwId" @change="changeArea()">
-                        <option v-for="item in listRW" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
-                    </select>
-                    <select class="form-select select-rounded-primary" style="width: 100px;" v-model="rtId" @change="changeArea()">
-                        <option v-for="item in listRT" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
-                    </select>
+                    <div class="flex-shrink-0">
+                        <select class="form-select select-rounded-primary me-2" v-model="rwId" @change="changeArea()">
+                            <option v-for="item in listRW" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0 ms-2">
+                        <select class="form-select select-rounded-primary" v-model="rtId" @change="changeArea()">
+                            <option value="">Semua RT &nbsp;</option>
+                            <option v-for="item in listRT" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -222,18 +227,17 @@ export default {
     computed: {
         listRT() {
             const tmpListRT = find(this.listRW, {'id': this.rwId})?.rt
-            if (tmpListRT) {
-                if (!this.rtId)
-                    this.rtId = tmpListRT[0].id
-            }
 
             return tmpListRT
         },
     },
     mounted() {
         this.fetchListRW()
-        this.rwId = localStorage.getItem('rwId')
-        this.rtId = localStorage.getItem('rtId')
+        const tmpRW = JSON.parse(localStorage.getItem('rw'))
+        const tmpRT = JSON.parse(localStorage.getItem('rt'))
+
+        this.rwId = tmpRW?.id
+        this.rtId = tmpRT?.id || ''
     },
     methods: {
         fetchListRW() {
@@ -247,8 +251,10 @@ export default {
             })
         },
         changeArea() {
-            this.$store.commit('setrwId', this.rwId)
-            this.$store.commit('setrtId', this.rtId)
+            const tmpRW = find(this.listRW, {'id': this.rwId})
+            const tmpRT = find(tmpRW?.rt, {'id': this.rtId})
+            this.$store.commit('setRW', tmpRW)
+            this.$store.commit('setRT', tmpRT)
             this.$router.go(0);
         },
         async logout() {

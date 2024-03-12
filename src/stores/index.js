@@ -3,20 +3,20 @@ import Vuex from 'vuex';
 export default new Vuex.Store({
     state: {
         user: null,
-        rwId: null,
-        rtId: null
+        rw: null,
+        rt: null
     },
     mutations: {
         setuser(state, value) {
             state.user = value;
         },
-        setrwId(state, value) {
-            state.rwId = value
-            localStorage.setItem('rwId', value)
+        setRW(state, value) {
+            state.rw = value
+            localStorage.setItem('rw', JSON.stringify(value))
         },
-        setrtId(state, value) {
-            state.rtId = value
-            localStorage.setItem('rtId', value)
+        setRT(state, value) {
+            state.rt = value
+            localStorage.setItem('rt', JSON.stringify(value))
         }
     },
     actions: {},
