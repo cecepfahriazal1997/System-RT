@@ -21,12 +21,17 @@
 
                 <!-- App Search-->
                 <div class="d-flex align-items-center">
-                    <select class="form-select select-rounded-primary me-2">
-                        <option value="" v-for="item in [1,2,3,4,5,6,7,8,9]" class="bg-white text-dark">RW 0{{item}} &nbsp;</option>
-                    </select>
-                    <select class="form-select select-rounded-primary">
-                        <option value="" v-for="item in [1,2,3,4,5,6,7,8,9]" class="bg-white text-dark">RT 0{{item}} &nbsp;</option>
-                    </select>
+                    <div class="flex-shrink-0">
+                        <select class="form-select select-rounded-primary me-2" v-model="rwId" @change="changeArea()">
+                            <option v-for="item in listRW" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0 ms-2">
+                        <select class="form-select select-rounded-primary" v-model="rtId" @change="changeArea()">
+                            <option value="">Semua RT &nbsp;</option>
+                            <option v-for="item in listRT" class="bg-white text-dark" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -131,6 +136,11 @@
 import simplebar from 'simplebar-vue';
 import 'simplebar-core/dist/simplebar.css';
 
+import { ApiCore } from '@/services/core';
+import apiEndpoint from '@/services/api-endpoint';
+
+import { find } from 'lodash'
+
 export default {
     name: 'NavBar',
     data() {
@@ -205,13 +215,48 @@ export default {
                 //         }
                 //     ]
                 // }
-            ]
+            ],
+            rwId: '',
+            rtId: '',
+            listRW: [],
         }
     },
     components: {
         simplebar,
     },
+    computed: {
+        listRT() {
+            const tmpListRT = find(this.listRW, {'id': this.rwId})?.rt
+
+            return tmpListRT
+        },
+    },
+    mounted() {
+        this.fetchListRW()
+        const tmpRW = JSON.parse(localStorage.getItem('rw'))
+        const tmpRT = JSON.parse(localStorage.getItem('rt'))
+
+        this.rwId = tmpRW?.id
+        this.rtId = tmpRT?.id || ''
+    },
     methods: {
+        fetchListRW() {
+            ApiCore.get(`${apiEndpoint.GENERAL}/rw`).then((result) => {
+                if (result.status) {
+                    this.listRW = result.data
+                    // if (!this.rwId)
+                        this.rwId = result.data[0].id
+                    // this.listRT = result.data[0].rt;
+                }
+            })
+        },
+        changeArea() {
+            const tmpRW = find(this.listRW, {'id': this.rwId})
+            const tmpRT = find(tmpRW?.rt, {'id': this.rtId})
+            this.$store.commit('setRW', tmpRW)
+            this.$store.commit('setRT', tmpRT)
+            this.$router.go(0);
+        },
         async logout() {
             this.$swal
                 .fire({

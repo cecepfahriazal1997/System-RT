@@ -123,6 +123,8 @@ router.beforeEach((to, from, next) => {
                     .then((response) => {
                         if ('status' in response && !response.status) {
                             localStorage.removeItem('token')
+                            localStorage.removeItem('rtId')
+                            localStorage.removeItem('rwId')
                             next({name: 'home'})
                         } else {
                             stores.commit('setuser', response)
