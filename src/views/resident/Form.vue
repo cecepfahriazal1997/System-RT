@@ -45,7 +45,7 @@
                                             <div class="form-group row mb-3">
                                                 <div class="col-md-6">
                                                     <label class="form-label">Provinsi <span class="text-danger">(*)</span></label>
-                                                    <Field name="province" as="select" class="form-select select-rounded padding-vertical-10" v-model="form.province.id" @change="fetchCity">
+                                                    <Field name="province" as="select" class="form-select select-rounded padding-vertical-10" v-model="form.province.id" @change="fetchCity(); getNameRegion(listProvince, form.province.id, 'province')">
                                                         <option value="">Pilih Provinsi</option>
                                                         <option v-for="item in listProvince" :value="item.id">{{item.name}}</option>
                                                     </Field>
@@ -53,7 +53,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Kabupaten/Kota <span class="text-danger">(*)</span></label>
-                                                    <Field name="city" as="select" class="form-select select-rounded padding-vertical-10" @change="fetchDistrict" v-model="form.city.id">
+                                                    <Field name="city" as="select" class="form-select select-rounded padding-vertical-10" @change="fetchDistrict(); getNameRegion(listCity, form.city.id, 'city')" v-model="form.city.id">
                                                         <option value="">Pilih Kabupaten/Kota</option>
                                                         <option v-for="item in listCity" :value="item.id">{{item.name}}</option>
                                                     </Field>
@@ -63,7 +63,7 @@
                                             <div class="form-group row mb-3">
                                                 <div class="col-md-6">
                                                     <label class="form-label">Kecamatan <span class="text-danger">(*)</span></label>
-                                                    <Field name="district" as="select" class="form-select select-rounded padding-vertical-10" @change="fetchSubDistrict" v-model="form.district.id">
+                                                    <Field name="district" as="select" class="form-select select-rounded padding-vertical-10" @change="fetchSubDistrict(); getNameRegion(listDistrict, form.district.id, 'district')" v-model="form.district.id">
                                                         <option value="">Pilih Kecamatan</option>
                                                         <option v-for="item in listDistrict" :value="item.id">{{item.name}}</option>
                                                     </Field>
@@ -71,7 +71,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Kelurahan <span class="text-danger">(*)</span></label>
-                                                    <Field name="sub_district" as="select" class="form-select select-rounded padding-vertical-10" v-model="form.sub_district.id">
+                                                    <Field name="sub_district" as="select" class="form-select select-rounded padding-vertical-10" v-model="form.sub_district.id" @change="getNameRegion(listSubDistrict, form.sub_district.id, 'subdistrict')">
                                                         <option value="">Pilih Kelurahan</option>
                                                         <option v-for="item in listSubDistrict" :value="item.id">{{item.name}}</option>
                                                         <ErrorMessage name="sub_district" :class="'text-danger'" />
@@ -81,7 +81,7 @@
                                             <div class="form-group row mb-3">
                                                 <div class="col-md-6">
                                                     <label class="form-label">Kode Pos</label>
-                                                    <Field name="postal_code" type="number" class="form-control custom-rounded-medium" placeholder="Masukan kode pos (opsional)" />
+                                                    <Field name="postal_code" type="number" class="form-control custom-rounded-medium" placeholder="Masukan kode pos (opsional)" v-model="form.postal_code" />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Dikeluarkan Pada <span class="text-danger">(*)</span></label>
@@ -97,7 +97,6 @@
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Menerima Bantuan</label>
                                                 <Field as="select" name="benefit" class="form-select select-rounded padding-vertical-10" v-model="form.social_assistance_recipients">
-                                                    <option value="">Tidak Menerima Bantuan</option>
                                                     <option v-for="item in listSocialAssistanceRecipients" :value="item.id">{{item.name}}</option>
                                                 </Field>
                                             </div>
@@ -107,7 +106,7 @@
                                                 <div class="d-block bg-light custom-rounded-medium p-3 mb-2" v-for="item, index in form.list_member">
                                                     <div class="d-flex align-items-end" style="gap: 0.5rem">
                                                         <div class="d-block w-100">
-                                                            <h6 class="mb-3">Anggota #{{index + 1}} {{ item }}</h6>
+                                                            <h6 class="mb-3">Anggota #{{index + 1}}</h6>
                                                             <input type="text" class="form-control bg-white fw-bold text-primary" readonly v-model="item.name" />
                                                         </div>
                                                         <div class="d-block flex-shrink-0">
@@ -122,7 +121,7 @@
                                                         </div>
                                                         <div class="d-flex flex-shrink-0 justify-content-end align-items-center">
                                                             <button type="button" class="btn btn-square border bg-info text-white me-2" data-bs-toggle="modal" data-bs-target=".modal-add-member" @click="editResident(item)"><i class="mdi mdi-circle-edit-outline fs-4"></i></button>
-                                                            <button type="button" class="btn btn-square border bg-white me-2"><i class="mdi mdi-trash-can-outline fs-4"></i></button>
+                                                            <button type="button" class="btn btn-square border bg-white me-2" @click="removeMember(index)"><i class="mdi mdi-trash-can-outline fs-4"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -357,7 +356,7 @@ export default {
             dataResident: {},
             listSocialAssistanceRecipients: [
                 {
-                    id: '-',
+                    id: '',
                     name: 'Tidak Menerima Bantuan'
                 },
                 {
@@ -398,7 +397,7 @@ export default {
     },
     computed: {
         listRT() {
-            const tmpListRT = find(this.listRW, {'id': this.rwId})?.rt
+            const tmpListRT = find(this.listRW, {'id': this.form.rw_id})?.rt
 
             return tmpListRT
         },
@@ -451,7 +450,7 @@ export default {
                 if (result.status) {
                     this.listRW = result.data
                     // if (!this.rwId)
-                        this.rwId = result.data[0].id
+                        this.form.rw_id = result.data[0].id
                     // this.listRT = result.data[0].rt;
                 }
             })
@@ -485,6 +484,7 @@ export default {
             });
         },
         fetchCity: function() {
+            this.form.city.id = ''
             this.listCity = [];
             
             if(this.form.province.id) {
@@ -497,6 +497,7 @@ export default {
             }
         },
         fetchDistrict: function() {
+            this.form.district.id = ''
             this.listDistrict = [];
             
             if(this.form.province.id && this.form.city.id) {
@@ -510,6 +511,7 @@ export default {
             }
         },
         fetchSubDistrict: function() {
+            this.form.sub_district.id = ''
             this.listSubDistrict = [];
             
             if(this.form.province.id && this.form.city.id) {
@@ -560,37 +562,61 @@ export default {
             this.dataResident.age = year + ' Tahun'
         },
         resetFormResident() {
-            // this.dataResident = { "identity_number": 1012931023, "name": "Cecep Rokani", "email": "ceceprokani@gmail.com", "phone": "0897817283743", "gender": "L", "placebirth": "Bandung", "datebirth": "1997-12-27", "religion": "islam", "education_id": 6, "work_id": 3, "blood_type": "a", "marriage_status": "1", "marriage_date": "2020-08-01", "citizenship": "wni", "imigran_number_paspor": "", "imigran_number_kitap": "", "father_name": "Ari Suprianto", "mother_name": "Titi Sutiarsih", "status": "muda", "type": "internal", "note": "-", "age": "" }
-            this.dataResident = {
-                identity_number: '',
-                name: '',
-                email: '',
-                phone: '',
-                gender: '',
-                placebirth: '',
-                datebirth: '',
-                religion: '',
-                education_id: '',
-                work_id: '',
-                blood_type: '',
-                marriage_status: '0',
-                marriage_date: '',
-                citizenship: 'wni',
-                imigran_number_paspor: '',
-                imigran_number_kitap: '',
-                father_name: '',
-                mother_name: '',
-                status: '',
-                have_identity_card: 0,
-                type: 'internal',
-                note: '',
-                age: '',
-                email: '',
-                phone: ''
-            }
+            this.dataResident = { "identity_number": 1012931023, "name": "Cecep Rokani", "email": "ceceprokani@gmail.com", "phone": "0897817283743", "gender": "L", "placebirth": "Bandung", "datebirth": "1997-12-27", "religion": "islam", "education_id": 6, "work_id": 3, "blood_type": "a", "marriage_status": "1", "marriage_date": "2020-08-01", "citizenship": "wni", "imigran_number_paspor": "", "imigran_number_kitap": "", "father_name": "Ari Suprianto", "mother_name": "Titi Sutiarsih", "status": "muda", "type": "internal", "note": "-", "age": "" }
+            // this.dataResident = {
+            //     identity_number: '',
+            //     name: '',
+            //     email: '',
+            //     phone: '',
+            //     gender: '',
+            //     placebirth: '',
+            //     datebirth: '',
+            //     religion: '',
+            //     education_id: '',
+            //     work_id: '',
+            //     blood_type: '',
+            //     marriage_status: '0',
+            //     marriage_date: '',
+            //     citizenship: 'wni',
+            //     imigran_number_paspor: '',
+            //     imigran_number_kitap: '',
+            //     father_name: '',
+            //     mother_name: '',
+            //     status: '',
+            //     have_identity_card: 0,
+            //     type: 'internal',
+            //     note: '',
+            //     age: '',
+            //     email: '',
+            //     phone: ''
+            // }
         },
         editResident(data) {
             this.dataResident = data
+        },
+        getNameRegion(data, id, type) {
+            const result = find(data, {'id': id})
+
+            switch (type) {
+                case 'province':
+                    this.form.province.name = result.name
+                    break;
+                case 'city':
+                    this.form.city.name = result.name
+                    break;
+                case 'district':
+                    this.form.district.name = result.name
+                    break;
+                case 'subdistrict':
+                    this.form.sub_district.name = result.name
+                    break;
+            
+                default:
+                    break;
+            }
+        },
+        removeMember(index) {
+            this.form.list_member.splice(index, 1)
         }
     }
 }
