@@ -446,7 +446,7 @@ export default {
     },
     methods: {
         fetchListRW() {
-            ApiCore.get(`${apiEndpoint.GENERAL}/rw`, {}, false).then((result) => {
+            ApiCore.get(`${apiEndpoint.GENERAL}/rw`, {}, true).then((result) => {
                 if (result.status) {
                     this.listRW = result.data
                     // if (!this.rwId)
@@ -464,7 +464,7 @@ export default {
         },
         fetchEducation() {
             this.listEducation = [];
-            ApiCore.get(`${apiEndpoint.ADMINISTRATION_MASTER}/education`, {}, false).then((result) => {
+            ApiCore.get(`${apiEndpoint.ADMINISTRATION_MASTER}/education`, {}, true).then((result) => {
                 if (result.status) {
                     this.listEducation = result.data
                 }
@@ -472,14 +472,14 @@ export default {
         },
         fetchWork() {
             this.listWork = [];
-            ApiCore.get(`${apiEndpoint.ADMINISTRATION_MASTER}/work`, {}, false).then((result) => {
+            ApiCore.get(`${apiEndpoint.ADMINISTRATION_MASTER}/work`, {}, true).then((result) => {
                 if (result.status) {
                     this.listWork = result.data
                 }
             })
         },
         fetchProvince: function () {
-            ApiCore.get(`${apiEndpoint.REGION}/province`, {}, false).then(res => {
+            ApiCore.get(`${apiEndpoint.REGION}/province`, {}, true).then(res => {
                 this.listProvince = res.data;
             });
         },

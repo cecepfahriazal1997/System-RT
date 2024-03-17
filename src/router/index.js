@@ -119,7 +119,7 @@ router.beforeEach((to, from, next) => {
 
     if (isAllow) {
         if (localData && !authRequired) {
-            ApiCore.get(`${apiEnpoint.ACCOUNT}/info`, null, false)
+            ApiCore.get(`${apiEnpoint.ACCOUNT}/info`)
                     .then((response) => {
                         if ('status' in response && !response.status) {
                             localStorage.removeItem('token')
