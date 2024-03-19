@@ -101,8 +101,8 @@
                                                 </Field>
                                             </div>
                                             <div class="spacer-medium"></div>
-                                            <h6>Anggota Keluarga ({{ form.list_member.length }} orang)</h6>
-                                            <template v-if="form.list_member.length">
+                                            <h6>Anggota Keluarga ({{ form.list_member?.length }} orang)</h6>
+                                            <template v-if="form.list_member?.length">
                                                 <div class="d-block bg-light custom-rounded-medium p-3 mb-2" v-for="item, index in form.list_member">
                                                     <div class="d-flex align-items-end" style="gap: 0.5rem">
                                                         <div class="d-block w-100">
@@ -456,9 +456,10 @@ export default {
             })
         },
         fetchData() {
-            ApiCore.get(`${apiEndpoint.ADMINISTRATION_MASTER}/education/${this.$route.params.id}`).then((result) => {
+            ApiCore.get(`${apiEndpoint.ADNUBUSTRATION_RESIDENT}/${this.$route.params.id}`).then((result) => {
                 if (result.status) {
                     this.form = result.data
+                    this.fetchCity(true)
                 }
             })
         },
@@ -483,8 +484,11 @@ export default {
                 this.listProvince = res.data;
             });
         },
-        fetchCity: function() {
-            this.form.city.id = ''
+        fetchCity: function(callDistrict = false) {
+            if (!callDistrict) {
+                this.form.city.id = ''
+                this.form.district.id = ''
+            }
             this.listCity = [];
             
             if(this.form.province.id) {
@@ -493,11 +497,15 @@ export default {
                     id_province : this.form.province.id
                 }, false).then(res => {
                     this.listCity = res.data;
+
+                    if (callDistrict)
+                        this.fetchDistrict(true)
                 });
             }
         },
-        fetchDistrict: function() {
-            this.form.district.id = ''
+        fetchDistrict: function(callSubDistrict = false) {
+            if (!callSubDistrict)
+                this.form.district.id = ''
             this.listDistrict = [];
             
             if(this.form.province.id && this.form.city.id) {
@@ -507,11 +515,16 @@ export default {
                     id_province : this.form.province.id
                 }, false).then(res => {
                     this.listDistrict = res.data;
+                    if (callSubDistrict) {
+                        this.fetchSubDistrict(true)
+                    }
                 });
             }
         },
-        fetchSubDistrict: function() {
-            this.form.sub_district.id = ''
+        fetchSubDistrict: function(noReplace = false) {
+            if(!noReplace) {
+                this.form.sub_district.id = ''
+            }
             this.listSubDistrict = [];
             
             if(this.form.province.id && this.form.city.id) {
@@ -527,7 +540,6 @@ export default {
         },
         handleSubmitResident() {
             if ('tmp_id' in this.dataResident) {
-                console.log(this.dataResident);
                 this.form.list_member.splice(this.dataResident.tmp_id, 1, {...this.dataResident})
             } else {
                 this.form.list_member.push({...this.dataResident, position: '', tmp_id: this.form.list_member.length})
