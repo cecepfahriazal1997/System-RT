@@ -47,13 +47,14 @@ export default class RequestHandler {
     constructor() {
         this.api = api;
         this.fileName = "ApiService";
-        this.loader = null
     }
 
-    async get(endpoint, params={}, withLoader=true) {
+    async get(endpoint, params={}, withLoader=false) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             api.get(endpoint, {
                 params: {
                     ...params,
@@ -61,7 +62,7 @@ export default class RequestHandler {
             })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -70,7 +71,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -78,12 +79,14 @@ export default class RequestHandler {
 
     async find(endpoint, param, withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             api.get(`${endpoint}/${param}`)
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -92,7 +95,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -100,15 +103,17 @@ export default class RequestHandler {
 
     async store(endpoint, body, withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .post(endpoint, {
                     ...body,
                 })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide()
+                        loader.hide()
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -117,7 +122,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide()
+                        loader.hide()
                     reject(error);
                 });
         });
@@ -125,8 +130,10 @@ export default class RequestHandler {
 
     async saveCustomHeader(endpoint, body, withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .post(`${endpoint}`, {
                     ...body,
@@ -138,7 +145,7 @@ export default class RequestHandler {
                 })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -147,7 +154,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -155,15 +162,17 @@ export default class RequestHandler {
 
     async update(endpoint, id, body, withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .put(`${endpoint}/${id}`, {
                     ...body,
                 })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -172,7 +181,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -180,13 +189,15 @@ export default class RequestHandler {
 
     async delete(endpoint, id, withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .delete(`${endpoint}/${id}`)
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -195,7 +206,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -203,8 +214,10 @@ export default class RequestHandler {
 
     async bulkDelete(endpoint, params, withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .delete(`${endpoint}/bulk-delete`, {
                     data: {
@@ -213,7 +226,7 @@ export default class RequestHandler {
                 })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         resolve(response.data);
                     } else {
@@ -222,7 +235,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -230,8 +243,10 @@ export default class RequestHandler {
 
     async downloadExcel(endpoint, params, uri='excel/download', fileName='file-download', withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .get(`${endpoint}/${uri}`, {
                     method: 'GET',
@@ -242,7 +257,7 @@ export default class RequestHandler {
                 })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/octet-stream' }));
                         const link = document.createElement('a');
@@ -255,7 +270,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -263,8 +278,10 @@ export default class RequestHandler {
 
     async downloadPDF(endpoint, params, uri='', filename = 'print', withLoader=true) {
         return new Promise((resolve, reject) => {
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api
                 .get(`${endpoint}/${uri}`, {
                     method: 'GET',
@@ -275,7 +292,7 @@ export default class RequestHandler {
                 })
                 .then((response) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                         const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
                         const link = document.createElement('a');
@@ -288,7 +305,7 @@ export default class RequestHandler {
                 })
                 .catch((error) => {
                     if (withLoader)
-                        this.loader.hide();
+                        loader.hide();
                     reject(error);
                 });
         });
@@ -307,8 +324,10 @@ export default class RequestHandler {
                 }
             }
 
-            if (withLoader)
-                this.loader = $loading.show();
+            let loader = null
+            if (withLoader) {
+                loader = $loading.show();
+            }
             this.api.post(endpoint, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -316,7 +335,7 @@ export default class RequestHandler {
             })
             .then((response) => {
                 if (withLoader)
-                    this.loader.hide();
+                    loader.hide();
                 if (response.statusText.toLowerCase() === 'ok' || response.status === 200) {
                     resolve(response.data);
                 } else {
@@ -325,7 +344,7 @@ export default class RequestHandler {
             })
             .catch((error) => {
                 if (withLoader)
-                    this.loader.hide();
+                    loader.hide();
                 reject(error);
             });
         });

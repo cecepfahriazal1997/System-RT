@@ -241,7 +241,7 @@ export default {
     },
     methods: {
         fetchListRW() {
-            ApiCore.get(`${apiEndpoint.GENERAL}/rw`).then((result) => {
+            ApiCore.get(`${apiEndpoint.GENERAL}/rw`, {}, true).then((result) => {
                 if (result.status) {
                     this.listRW = result.data
                     // if (!this.rwId)

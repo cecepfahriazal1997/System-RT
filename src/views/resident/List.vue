@@ -95,25 +95,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="item in [1,2,3,4,5]">
+                                            <tr v-for="item in list">
                                                 <td class="middle-item"><input type="checkbox" class="form-check-input" /></td>
                                                 <td class="middle-item">
-                                                    <div>1019202934{{ item }}</div>
-                                                    <span class="badge badge-soft-primary" v-if="item == 1">Pindahan</span>
+                                                    <div>{{ item.number }}</div>
+                                                    <span class="badge badge-soft-primary" v-if="item.type == 'external'">Pindahan</span>
                                                 </td>
                                                 <td class="middle-item">
-                                                    <div class="fw-bold mb-1">Ahmad Wibowo</div>
-                                                    <div>20030192000{{ item }}</div>
+                                                    <div class="fw-bold mb-1">{{item.leader?.name}}</div>
+                                                    <div>{{ item.leader?.identity_number }}</div>
                                                 </td>
                                                 <td class="middle-item">
-                                                    <div class="mb-1">2 Orang</div>
-                                                    <a href="javascript:void(0)" class="text-primary fw-bold text-decoration-underline waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".modal-member">Lihat Anggota</a>
+                                                    <div class="mb-1">{{item.member?.length}} Orang</div>
+                                                    <a href="javascript:void(0)" class="text-primary fw-bold text-decoration-underline waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".modal-member" @click="detailFamilyCard = item">Lihat Anggota</a>
                                                 </td>
-                                                <td class="middle-item">test@gmail.com</td>
-                                                <td class="middle-item">08981981239</td>
+                                                <td class="middle-item">{{item.leader?.email}}</td>
+                                                <td class="middle-item">{{item.leader?.phone}}</td>
                                                 <td class="middle-item">
                                                     <div class="d-flex justify-content-end align-items-center">
-                                                        <button type="button" class="btn btn-square border bg-info text-white me-2"><i class="mdi mdi-circle-edit-outline fs-4"></i></button>
+                                                        <router-link :to="`resident/form/${item.family_card_id}`" type="button" class="btn btn-square border bg-info text-white me-2"><i class="mdi mdi-circle-edit-outline fs-4"></i></router-link>
                                                         <button type="button" class="btn btn-square border bg-white me-2"><i class="mdi mdi-trash-can-outline fs-4"></i></button>
                                                     </div>
                                                 </td>
@@ -127,8 +127,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="2%"><input type="checkbox" class="form-check-input" /></th>
-                                                <th>NIK</th>
                                                 <th>Nama</th>
+                                                <th>Jenis Kelamin</th>
                                                 <th>Status</th>
                                                 <th>Email</th>
                                                 <th>Telepon</th>
@@ -136,19 +136,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="item in []">
+                                            <tr v-for="item in list">
                                                 <td class="middle-item"><input type="checkbox" class="form-check-input" /></td>
-                                                <td class="middle-item">1001910110{{ item }}</td>
                                                 <td class="middle-item">
-                                                    <div>Ahmad Wibowo</div>
-                                                    <span class="badge badge-soft-primary" v-if="item == 1">Pindahan</span>
+                                                    <div class="fw-bold">{{ item.name }}</div>
+                                                    <div>{{ item.identity_number }}</div>
+                                                    <span class="badge badge-soft-primary" v-if="item.type == 'external'">Pindahan</span>
                                                 </td>
-                                                <td class="middle-item">Lansia</td>
-                                                <td class="middle-item">test@gmail.com</td>
-                                                <td class="middle-item">08981981239</td>
+                                                <td class="middle-item">{{ item.gender == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
+                                                <td class="middle-item" style="text-transform: capitalize">{{ item.status }}</td>
+                                                <td class="middle-item">{{ item.email }}</td>
+                                                <td class="middle-item">{{ item.phone }}</td>
                                                 <td class="middle-item">
                                                     <div class="d-flex justify-content-end align-items-center">
-                                                        <button type="button" class="btn btn-square border bg-info text-white me-2"><i class="mdi mdi-circle-edit-outline fs-4"></i></button>
+                                                        <router-link :to="`resident/form/${item.family_card_id}`" type="button" class="btn btn-square border bg-info text-white me-2"><i class="mdi mdi-circle-edit-outline fs-4"></i></router-link>
                                                         <button type="button" class="btn btn-square border bg-white me-2"><i class="mdi mdi-trash-can-outline fs-4"></i></button>
                                                         <div class="dropdown dropstart">
                                                             <button class="btn btn-square border bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -186,7 +187,7 @@
                 <div class="modal-header border-0">
                     <div class="d-block px-2">
                         <p class="modal-title mb-1">Detail Anggota Keluarga</p>
-                        <h5>#01390129301293013</h5>
+                        <h5>#{{detailFamilyCard.number}}</h5>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -195,39 +196,39 @@
                             <div class="row bg-light custom-rounded-medium p-2">
                                 <div class="col-md-6 mb-2 mt-2">
                                     <p class="mb-1 font-size-12">Nama Kepala Keluarga</p>
-                                    <h6>Agung Sanjaya</h6>
+                                    <h6>{{detailFamilyCard.leader?.name}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2 mt-2">
                                     <p class="mb-1 font-size-12">Desa/Kelurahan</p>
-                                    <h6>Cimerang</h6>
+                                    <h6>{{detailFamilyCard.sub_district}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <p class="mb-1 font-size-12">RT/RW</p>
-                                    <h6>003/004</h6>
+                                    <h6>{{detailFamilyCard.rt}}/{{detailFamilyCard.rw}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <p class="mb-1 font-size-12">Kecamatan</p>
-                                    <h6>Padalarang</h6>
+                                    <h6>{{detailFamilyCard.district}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <p class="mb-1 font-size-12">Kode Pos</p>
-                                    <h6>40192</h6>
+                                    <h6>{{detailFamilyCard.postal_code}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <p class="mb-1 font-size-12">Kabupaten/Kota</p>
-                                    <h6>Bandung Barat</h6>
+                                    <h6>{{detailFamilyCard.city}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <p class="mb-1 font-size-12">Alamat</p>
-                                    <h6>Jl. Cimerang</h6>
+                                    <h6>{{detailFamilyCard.address}}</h6>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <p class="mb-1 font-size-12">Provinsi</p>
-                                    <h6>Jawa Barat</h6>
+                                    <h6>{{detailFamilyCard.province}}</h6>
                                 </div>
                             </div>
                         </div>
-                        <h6>Daftar Anggota (3 orang)</h6>
+                        <h6>Daftar Anggota ({{detailFamilyCard.member?.length}} orang)</h6>
                         <div class="d-block">
                             <table class="table table-custom-card">
                                 <thead>
@@ -239,10 +240,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in [1,2,3]">
-                                        <td class="middle-item">1001910110{{ item }}</td>
-                                        <td class="middle-item"><div>Ahmad Wibowo</div></td>
-                                        <td class="middle-item">Kepala Keluarga</td>
+                                    <tr v-for="item in detailFamilyCard.member">
+                                        <td class="middle-item">{{ item.identity_number }}</td>
+                                        <td class="middle-item"><div>{{item.name}}</div></td>
+                                        <td class="middle-item">
+                                            <span v-if="item.position == 'leader'">Kepala Keluarga</span>
+                                            <span v-if="item.position == 'wife'">Istri</span>
+                                            <span v-if="item.position == 'child'">Anak</span>
+                                            <span v-if="item.position == 'other'">Family Lainnya</span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -399,6 +405,7 @@ import simplebar from 'simplebar-vue';
 import 'simplebar-core/dist/simplebar.css';
 
 import { ApiCore } from '@/services/core';
+import apiEnpoint from '@/services/api-endpoint';
 // import apiEnpoint from '@/services/api-endpoint';
 export default {
     name: 'Resident',
@@ -406,6 +413,7 @@ export default {
         return {
             currTab: 'all',
             list: [],
+            detailFamilyCard: {child: []},
             pagination: {
                 prev: false,
                 next: false,
@@ -419,16 +427,17 @@ export default {
         simplebar,
     },
     mounted() {
-        // this.fetchDataAnnouncement(this.pagination.page)
+        this.fetchData(this.pagination.page)
     },
     methods: {
-        fetchDataAnnouncement(page) {
-            ApiCore.get(`payment-arrears`, {
+        fetchData(page) {
+            ApiCore.get(`${apiEnpoint.ADNUBUSTRATION_RESIDENT}`, {
                 page: page,
                 limit: this.pagination.limit,
-            }).then((result) => {
+                type: this.currTab
+            }, true).then((result) => {
                 if (result.status) {
-                    this.list = result.data.data
+                    this.list = result.data
                 }
                 this.pagination.prev = result.pagination.prev
                 this.pagination.next = result.pagination.next
@@ -438,6 +447,7 @@ export default {
         },
         changeTab(tab) {
             this.currTab = tab
+            this.fetchData(this.pagination.page)
         }
     }
 }

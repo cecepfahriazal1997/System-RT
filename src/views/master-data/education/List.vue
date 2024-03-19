@@ -129,7 +129,7 @@ export default {
                 keywords: this.keywords,
                 page: page,
                 limit: this.pagination.limit,
-            }).then((result) => {
+            }, true).then((result) => {
                 if (result.status) {
                     this.list = result.data
                 }
