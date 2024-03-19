@@ -574,34 +574,34 @@ export default {
             this.dataResident.age = year + ' Tahun'
         },
         resetFormResident() {
-            this.dataResident = { "identity_number": 1012931023, "name": "Cecep Rokani", "email": "ceceprokani@gmail.com", "phone": "0897817283743", "gender": "L", "placebirth": "Bandung", "datebirth": "1997-12-27", "religion": "islam", "education_id": 6, "work_id": 3, "blood_type": "a", "marriage_status": "1", "marriage_date": "2020-08-01", "citizenship": "wni", "imigran_number_paspor": "", "imigran_number_kitap": "", "father_name": "Ari Suprianto", "mother_name": "Titi Sutiarsih", "status": "muda", "type": "internal", "note": "-", "age": "" }
-            // this.dataResident = {
-            //     identity_number: '',
-            //     name: '',
-            //     email: '',
-            //     phone: '',
-            //     gender: '',
-            //     placebirth: '',
-            //     datebirth: '',
-            //     religion: '',
-            //     education_id: '',
-            //     work_id: '',
-            //     blood_type: '',
-            //     marriage_status: '0',
-            //     marriage_date: '',
-            //     citizenship: 'wni',
-            //     imigran_number_paspor: '',
-            //     imigran_number_kitap: '',
-            //     father_name: '',
-            //     mother_name: '',
-            //     status: '',
-            //     have_identity_card: 0,
-            //     type: 'internal',
-            //     note: '',
-            //     age: '',
-            //     email: '',
-            //     phone: ''
-            // }
+            // this.dataResident = { "identity_number": 1012931023, "name": "Cecep Rokani", "email": "ceceprokani@gmail.com", "phone": "0897817283743", "gender": "L", "placebirth": "Bandung", "datebirth": "1997-12-27", "religion": "islam", "education_id": 6, "work_id": 3, "blood_type": "a", "marriage_status": "1", "marriage_date": "2020-08-01", "citizenship": "wni", "imigran_number_paspor": "", "imigran_number_kitap": "", "father_name": "Ari Suprianto", "mother_name": "Titi Sutiarsih", "status": "muda", "type": "internal", "note": "-", "age": "" }
+            this.dataResident = {
+                identity_number: '',
+                name: '',
+                email: '',
+                phone: '',
+                gender: '',
+                placebirth: '',
+                datebirth: '',
+                religion: '',
+                education_id: '',
+                work_id: '',
+                blood_type: '',
+                marriage_status: '0',
+                marriage_date: '',
+                citizenship: 'wni',
+                imigran_number_paspor: '',
+                imigran_number_kitap: '',
+                father_name: '',
+                mother_name: '',
+                status: '',
+                have_identity_card: 0,
+                type: 'internal',
+                note: '',
+                age: '',
+                email: '',
+                phone: ''
+            }
         },
         editResident(data) {
             this.dataResident = data
