@@ -166,7 +166,7 @@ export default {
                         },
                         {
                             title: 'Pekerjaan',
-                            url: '/work',
+                            url: '/master-work',
                             role: ['superadmin']
                         },
                         {
