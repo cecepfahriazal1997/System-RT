@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box text-center">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="/" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="@/assets/images/logo/logo.svg" alt="logo-sm-dark" height="22">
                         </span>
